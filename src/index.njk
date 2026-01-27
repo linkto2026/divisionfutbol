@@ -3,24 +3,21 @@ layout: layouts/base.njk
 title: Inicio
 ---
 
-<h1>Últimas notas</h1>
+<h1>Últimas noticias</h1>
 
 <ul>
-  {% for post in collections.all | reverse %}
-    {% if post.url != "/" %}
-      <li style="margin-bottom:14px;">
-        <a href="{{ post.url | url }}" style="font-weight:700;">
-          {{ post.data.title or post.fileSlug }}
-        </a>
-        <div style="color:#555;font-size:14px;">
-          {% if post.data.date %}
-            <span>{{ post.data.date | date("yyyy-LL-dd") }}</span>
-          {% endif %}
-          {% if post.data.category %}
-            <span> · {{ post.data.category }}</span>
-          {% endif %}
-        </div>
-      </li>
-    {% endif %}
+  {% for post in collections.posts %}
+    <li style="margin-bottom:14px;">
+      <a href="{{ post.url | url }}" style="font-weight:700;">
+        {{ post.data.title }}
+      </a>
+
+      <div style="font-size:14px;color:#555;">
+        {{ post.data.date | date }}
+        {% if post.data.category %}
+          · {{ post.data.category }}
+        {% endif %}
+      </div>
+    </li>
   {% endfor %}
 </ul>
