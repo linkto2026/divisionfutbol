@@ -4,43 +4,51 @@ pagination:
   data: categories
   size: 1
   alias: cat
-permalink: "categoria/{{ cat.slug }}/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+permalink: "categoria/{{ cat.slug }}/index.html"
 ---
+
+{# -------------------------------------------
+   Config
+-------------------------------------------- #}
+{% set pageSize = 10 %}
+
+{# Posts de esta categoría (ya vienen ordenados por fecha en collections.posts) #}
+{% set items = collections.posts | filterby("data.category", cat.name) %}
+
+{# Cantidad de páginas para esta categoría #}
+{% set totalPages = (items.length / pageSize) | round(0, "ceil") %}
+
+{# Número de página actual (por query param no se puede en estático, así que usaremos /page/2/ con un archivo extra) #}
 
 <h1>{{ cat.name }}</h1>
 
-{% set items = collections.posts | filterby("data.category", cat.name) %}
+{% if items.length == 0 %}
+  <p>No hay noticias aún en esta categoría.</p>
+{% else %}
 
-<ul>
-  {% for post in items | slice( pagination.pageNumber * 10, (pagination.pageNumber * 10) + 10 ) %}
-    <li style="margin-bottom:14px;">
-      <a href="{{ post.url | url }}" style="font-weight:700;">
-        {{ post.data.title }}
-      </a>
+  {# Página 1 (index) muestra los primeros 10 #}
+  <ul>
+    {% for post in items | slice(0, pageSize) %}
+      <li style="margin-bottom:14px;">
+        <a href="{{ post.url | url }}" style="font-weight:700;">
+          {{ post.data.title }}
+        </a>
+        <div style="font-size:14px;color:#555;">
+          {{ post.data.date | date }}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 
-      <div style="font-size:14px;color:#555;">
-        {{ post.data.date | date }}
+  {% if totalPages > 1 %}
+    <hr style="margin:16px 0;">
+    <nav style="display:flex;justify-content:space-between;gap:12px;">
+      <div></div>
+      <div style="color:#555;">Página 1 de {{ totalPages }}</div>
+      <div style="text-align:right;">
+        <a href="{{ ('/categoria/' ~ cat.slug ~ '/page/2/') | url }}">Siguiente →</a>
       </div>
-    </li>
-  {% endfor %}
-</ul>
+    </nav>
+  {% endif %}
 
-<hr style="margin:16px 0;">
-
-<nav style="display:flex;justify-content:space-between;gap:12px;">
-  <div>
-    {% if pagination.pageNumber > 0 %}
-      <a href="{{ ('/categoria/' ~ cat.slug ~ '/' ~ (pagination.pageNumber == 1 ? '' : 'page/' ~ pagination.pageNumber ~ '/')) | url }}">← Anterior</a>
-    {% endif %}
-  </div>
-
-  <div style="color:#555;">
-    Página {{ pagination.pageNumber + 1 }}
-  </div>
-
-  <div style="text-align:right;">
-    {% if (pagination.pageNumber + 1) * 10 < items.length %}
-      <a href="{{ ('/categoria/' ~ cat.slug ~ '/page/' ~ (pagination.pageNumber + 2) ~ '/') | url }}">Siguiente →</a>
-    {% endif %}
-  </div>
-</nav>
+{% endif %}
