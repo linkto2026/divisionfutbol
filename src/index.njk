@@ -1,72 +1,69 @@
 ---
 layout: layouts/base.njk
 title: Inicio
+pagination:
+  data: collections.posts
+  size: 10
+  alias: postsPage
 ---
+
+<h1 class="h1">Últimas noticias</h1>
 
 {% set featured = collections.featuredPosts[0] %}
 
-<div class="grid">
-  <section>
-    {% if featured %}
-      <article class="hero">
-        {% if featured.data.cover %}
-          <img src="{{ featured.data.cover | url }}">
-        {% endif %}
-        <div class="hero-content">
-          {% if featured.data.category %}
-            <div class="category">{{ featured.data.category }}</div>
-          {% endif %}
+{% if featured %}
+  <section class="featured">
+    {% if featured.data.cover %}
+      <img src="{{ featured.data.cover | url }}" alt="{{ featured.data.title }}">
+    {% endif %}
 
-          <h1>{{ featured.data.title }}</h1>
+    <h2>
+      <a href="{{ featured.url | url }}">{{ featured.data.title }}</a>
+    </h2>
 
-          {% if featured.data.excerpt %}
-            <p>{{ featured.data.excerpt }}</p>
-          {% endif %}
+    <div class="meta">
+      {{ featured.data.date | date }}
+      {% if featured.data.category %} · {{ featured.data.category }}{% endif %}
+    </div>
 
-          <a href="{{ featured.url | url }}" style="margin-top:10px;color:#fff;font-weight:700;">
-            Leer más →
-          </a>
-        </div>
-      </article>
+    {% if featured.data.excerpt %}
+      <p>{{ featured.data.excerpt }}</p>
     {% endif %}
   </section>
 
-  <aside class="sidebar">
-    <h3>Últimas Noticias</h3>
-    {% for post in collections.posts | slice(0,5) %}
-      {% if not post.data.featured %}
-        <div class="side-item">
-          {% if post.data.cover %}
-            <img src="{{ post.data.cover | url }}">
-          {% endif %}
-          <div>
-            <span>{{ post.data.date | date }}</span><br>
-            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-  </aside>
-</div>
+  <div class="hr"></div>
+{% endif %}
 
-<h2 style="margin-top:40px;">Más noticias</h2>
-
-<section class="cards">
-  {% for post in collections.posts | slice(1,5) %}
+<ul class="list">
+  {% for post in postsPage %}
     {% if not post.data.featured %}
-      <article class="card">
-        {% if post.data.cover %}
-          <img src="{{ post.data.cover | url }}">
-        {% endif %}
-        <div class="card-body">
-          {% if post.data.category %}
-            <div class="category">{{ post.data.category }}</div>
-          {% endif %}
-          <h4>
-            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-          </h4>
+      <li>
+        <a href="{{ post.url | url }}"><strong>{{ post.data.title }}</strong></a>
+        <div class="meta">
+          {{ post.data.date | date }}
+          {% if post.data.category %} · {{ post.data.category }}{% endif %}
         </div>
-      </article>
+      </li>
     {% endif %}
   {% endfor %}
-</section>
+</ul>
+
+<div class="hr"></div>
+
+<nav class="meta" style="display:flex;justify-content:space-between;">
+  <div>
+    {% if pagination.href.previous %}
+      <a href="{{ pagination.href.previous | url }}">← Anterior</a>
+    {% endif %}
+  </div>
+
+  <div>
+    Página {{ pagination.pageNumber + 1 }} de {{ pagination.pages.length }}
+  </div>
+
+  <div>
+    {% if pagination.href.next %}
+      <a href="{{ pagination.href.next | url }}">Siguiente →</a>
+    {% endif %}
+  </div>
+</nav>
