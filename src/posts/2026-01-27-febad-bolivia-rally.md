@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 title: "FEBAD CONFIRMA CALENDARIO AUTOMOVILISMO Y EL CODASUR SE MANTIENE EN SUCRE"
 date: 2026-01-27
-category: "Selección"
+category: "Automovilismo"
 ---
 
 
