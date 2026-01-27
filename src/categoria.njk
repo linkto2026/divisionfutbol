@@ -4,23 +4,43 @@ pagination:
   data: categories
   size: 1
   alias: cat
-permalink: "categoria/{{ cat.slug }}/index.html"
+permalink: "categoria/{{ cat.slug }}/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
 ---
 
 <h1>{{ cat.name }}</h1>
 
-<ul>
-  {% for post in collections.posts %}
-    {% if post.data.category == cat.name %}
-      <li style="margin-bottom:14px;">
-        <a href="{{ post.url | url }}" style="font-weight:700;">
-          {{ post.data.title }}
-        </a>
+{% set items = collections.posts | filterby("data.category", cat.name) %}
 
-        <div style="font-size:14px;color:#555;">
-          {{ post.data.date | date }}
-        </div>
-      </li>
-    {% endif %}
+<ul>
+  {% for post in items | slice( pagination.pageNumber * 10, (pagination.pageNumber * 10) + 10 ) %}
+    <li style="margin-bottom:14px;">
+      <a href="{{ post.url | url }}" style="font-weight:700;">
+        {{ post.data.title }}
+      </a>
+
+      <div style="font-size:14px;color:#555;">
+        {{ post.data.date | date }}
+      </div>
+    </li>
   {% endfor %}
 </ul>
+
+<hr style="margin:16px 0;">
+
+<nav style="display:flex;justify-content:space-between;gap:12px;">
+  <div>
+    {% if pagination.pageNumber > 0 %}
+      <a href="{{ ('/categoria/' ~ cat.slug ~ '/' ~ (pagination.pageNumber == 1 ? '' : 'page/' ~ pagination.pageNumber ~ '/')) | url }}">← Anterior</a>
+    {% endif %}
+  </div>
+
+  <div style="color:#555;">
+    Página {{ pagination.pageNumber + 1 }}
+  </div>
+
+  <div style="text-align:right;">
+    {% if (pagination.pageNumber + 1) * 10 < items.length %}
+      <a href="{{ ('/categoria/' ~ cat.slug ~ '/page/' ~ (pagination.pageNumber + 2) ~ '/') | url }}">Siguiente →</a>
+    {% endif %}
+  </div>
+</nav>
