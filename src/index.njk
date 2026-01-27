@@ -13,11 +13,16 @@ title: Inicio
           <img src="{{ featured.data.cover | url }}">
         {% endif %}
         <div class="hero-content">
-          <div class="category">{{ featured.data.category }}</div>
+          {% if featured.data.category %}
+            <div class="category">{{ featured.data.category }}</div>
+          {% endif %}
+
           <h1>{{ featured.data.title }}</h1>
+
           {% if featured.data.excerpt %}
             <p>{{ featured.data.excerpt }}</p>
           {% endif %}
+
           <a href="{{ featured.url | url }}" style="margin-top:10px;color:#fff;font-weight:700;">
             Leer más →
           </a>
@@ -29,33 +34,39 @@ title: Inicio
   <aside class="sidebar">
     <h3>Últimas Noticias</h3>
     {% for post in collections.posts | slice(0,5) %}
-      <div class="side-item">
-        {% if post.data.cover %}
-          <img src="{{ post.data.cover | url }}">
-        {% endif %}
-        <div>
-          <span>{{ post.data.date | date }}</span><br>
-          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+      {% if not post.data.featured %}
+        <div class="side-item">
+          {% if post.data.cover %}
+            <img src="{{ post.data.cover | url }}">
+          {% endif %}
+          <div>
+            <span>{{ post.data.date | date }}</span><br>
+            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+          </div>
         </div>
-      </div>
+      {% endif %}
     {% endfor %}
   </aside>
 </div>
 
-<h2 style="margin-top:40px;">Tendencias</h2>
+<h2 style="margin-top:40px;">Más noticias</h2>
 
 <section class="cards">
   {% for post in collections.posts | slice(1,5) %}
-    <article class="card">
-      {% if post.data.cover %}
-        <img src="{{ post.data.cover | url }}">
-      {% endif %}
-      <div class="card-body">
-        <div class="category">{{ post.data.category }}</div>
-        <h4>
-          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-        </h4>
-      </div>
-    </article>
+    {% if not post.data.featured %}
+      <article class="card">
+        {% if post.data.cover %}
+          <img src="{{ post.data.cover | url }}">
+        {% endif %}
+        <div class="card-body">
+          {% if post.data.category %}
+            <div class="category">{{ post.data.category }}</div>
+          {% endif %}
+          <h4>
+            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+          </h4>
+        </div>
+      </article>
+    {% endif %}
   {% endfor %}
 </section>
