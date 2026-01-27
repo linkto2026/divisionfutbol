@@ -5,6 +5,9 @@ module.exports = function (eleventyConfig) {
       includes: "_includes",
       output: "_site"
     },
-    templateFormats: ["md", "njk", "html"]
+    templateFormats: ["md", "njk", "html"],
+
+    // 👇 importante para GitHub Pages Project Pages
+    pathPrefix: "/divisionfutbol/"
   };
 };
