@@ -8,6 +8,12 @@ module.exports = function (eleventyConfig) {
     const d = new Date(value);
     return d.toISOString().split("T")[0];
   });
+  
+    eleventyConfig.addNunjucksGlobal("range", (start, end) => {
+    const out = [];
+    for (let i = start; i < end; i++) out.push(i);
+    return out;
+  });
 
   // Filtrar colección por un valor (ej: data.category == "Selección")
   eleventyConfig.addFilter("filterby", (arr, keyPath, value) => {
