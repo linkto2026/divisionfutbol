@@ -10,17 +10,16 @@ permalink: "categoria/{{ cat.slug }}/index.html"
 <h1>{{ cat.name }}</h1>
 
 <ul>
-  {% for post in collections.all | reverse %}
-    {% if post.url != "/" and post.data.category == cat.name %}
-      <li style="margin-bottom:12px;">
+  {% for post in collections.posts %}
+    {% if post.data.category == cat.name %}
+      <li style="margin-bottom:14px;">
         <a href="{{ post.url | url }}" style="font-weight:700;">
           {{ post.data.title }}
         </a>
-        {% if post.data.date %}
-          <div style="font-size:14px;color:#555;">
-            {{ post.data.date | date }}
-          </div>
-        {% endif %}
+
+        <div style="font-size:14px;color:#555;">
+          {{ post.data.date | date }}
+        </div>
       </li>
     {% endif %}
   {% endfor %}
