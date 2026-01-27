@@ -1,0 +1,4 @@
+{
+  "layout": "layouts/post.njk",
+  "permalink": "nota/{{ page.fileSlug }}/index.html"
+}
