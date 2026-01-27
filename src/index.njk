@@ -7,14 +7,14 @@ pagination:
   alias: postsPage
 ---
 
-{# NOTICIA DESTACADA #}
-{% set featured = collections.posts | selectattr("data.featured", "equalto", true) | first %}
+{# Noticia destacada (la más nueva entre featuredPosts) #}
+{% set featured = collections.featuredPosts[0] %}
 
 {% if featured %}
   <section style="margin-bottom:32px;">
     {% if featured.data.cover %}
-      <img 
-        src="{{ featured.data.cover | url }}" 
+      <img
+        src="{{ featured.data.cover | url }}"
         alt="{{ featured.data.title }}"
         style="width:100%;max-height:460px;object-fit:cover;border-radius:8px;"
       >
@@ -39,7 +39,6 @@ pagination:
   <hr>
 {% endif %}
 
-{# LISTADO NORMAL #}
 <h2>Últimas noticias</h2>
 
 <ul>
