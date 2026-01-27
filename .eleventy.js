@@ -1,20 +1,19 @@
 module.exports = function (eleventyConfig) {
 
-  // Filtro seguro para fecha
+  // Filtro seguro para fecha (YYYY-MM-DD)
   eleventyConfig.addFilter("date", (value) => {
     if (!value) return "";
     const d = new Date(value);
     return d.toISOString().split("T")[0];
   });
 
-  // Slug simple
-  eleventyConfig.addFilter("slug", (str = "") =>
-    String(str)
-      .toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "")
-  );
+  // Colección de posts ORDENADOS POR FECHA
+  eleventyConfig.addCollection("posts", (collectionApi) => {
+    return collectionApi
+      .getFilteredByGlob("src/posts/**/*.md")
+      .filter(p => p.data.date)
+      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+  });
 
   return {
     dir: {
