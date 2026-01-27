@@ -2,27 +2,19 @@
 layout: layouts/base.njk
 ---
 
-<article>
+<article class="post">
   {% if cover %}
-    <img
-      src="{{ cover | url }}"
-      alt="{{ title }}"
-      style="width:100%;max-height:420px;object-fit:cover;margin-bottom:16px;border-radius:6px;"
-    >
+    <img class="post-cover" src="{{ cover | url }}" alt="{{ title }}">
   {% endif %}
 
-  <h1 style="margin-bottom:6px;">{{ title }}</h1>
+  <h1>{{ title }}</h1>
 
-  <p style="margin-top:0;color:#555;">
-    {% if date %}
-      <span>{{ date | date }}</span>
-    {% endif %}
-    {% if category %}
-      <span> · {{ category }}</span>
-    {% endif %}
-  </p>
+  <div class="meta">
+    {% if date %}{{ date | date }}{% endif %}
+    {% if category %} · {{ category }}{% endif %}
+  </div>
 
-  <hr>
+  <div class="hr"></div>
 
   {{ content | safe }}
 </article>
