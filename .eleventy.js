@@ -13,6 +13,12 @@ module.exports = function (eleventyConfig) {
       .getFilteredByGlob("src/posts/**/*.md")
       .filter(p => p.data.date)
       .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+      // Filtrar colección por un valor (ej: data.category == "Selección")
+  eleventyConfig.addFilter("filterby", (arr, keyPath, value) => {
+    if (!Array.isArray(arr)) return [];
+    const get = (obj, path) => path.split(".").reduce((o, k) => (o ? o[k] : undefined), obj);
+    return arr.filter(item => get(item, keyPath) === value);
+
   });
 
   return {
