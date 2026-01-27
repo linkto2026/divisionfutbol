@@ -8,8 +8,18 @@ title: Inicio
 <ul>
   {% for post in collections.all | reverse %}
     {% if post.url != "/" %}
-      <li>
-        <a href="{{ post.url | url }}">{{ post.data.title or post.fileSlug }}</a>
+      <li style="margin-bottom:14px;">
+        <a href="{{ post.url | url }}" style="font-weight:700;">
+          {{ post.data.title or post.fileSlug }}
+        </a>
+        <div style="color:#555;font-size:14px;">
+          {% if post.data.date %}
+            <span>{{ post.data.date | date("yyyy-LL-dd") }}</span>
+          {% endif %}
+          {% if post.data.category %}
+            <span> · {{ post.data.category }}</span>
+          {% endif %}
+        </div>
       </li>
     {% endif %}
   {% endfor %}
