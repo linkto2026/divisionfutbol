@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ title or "División Fútbol" }}</title>
+</head>
+<body>
+  <main style="max-width:900px;margin:0 auto;padding:20px;font-family:system-ui;">
+    <h2 style="margin:0 0 10px 0;"><a href="/" style="text-decoration:none;color:inherit;">División Fútbol</a></h2>
+    <hr>
+    {{ content | safe }}
+  </main>
+</body>
+</html>
