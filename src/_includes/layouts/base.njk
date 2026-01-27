@@ -6,12 +6,37 @@
   <title>{{ title or "División Fútbol" }}</title>
 </head>
 <body>
-  <main style="max-width:900px;margin:0 auto;padding:20px;font-family:system-ui;">
-    <h2 style="margin:0 0 10px 0;">
-      <a href="{{ '/' | url }}" style="text-decoration:none;color:inherit;">División Fútbol</a>
-    </h2>
-    <hr>
+  <main style="max-width:1000px;margin:0 auto;padding:20px;font-family:system-ui;">
+    
+    <header style="display:flex;flex-direction:column;gap:10px;">
+      <h2 style="margin:0;">
+        <a href="{{ '/' | url }}" style="text-decoration:none;color:inherit;">
+          División Fútbol
+        </a>
+      </h2>
+
+      <nav style="display:flex;gap:12px;flex-wrap:wrap;font-size:15px;">
+        <a href="{{ '/' | url }}">Inicio</a>
+
+        <a href="{{ '/categoria/seleccion/' | url }}">Selección</a>
+        <a href="{{ '/categoria/division-profesional/' | url }}">Div Pro</a>
+        <a href="{{ '/categoria/copa-simon-bolivar/' | url }}">Copa Simón Bolívar</a>
+
+        <span>ACF:</span>
+        <a href="{{ '/categoria/acf-primera-a/' | url }}">Primera A</a>
+        <a href="{{ '/categoria/acf-primera-b/' | url }}">Primera B</a>
+        <a href="{{ '/categoria/acf-ascensos/' | url }}">Ascensos</a>
+
+        <a href="{{ '/categoria/internacional/' | url }}">Internacional</a>
+        <a href="{{ '/categoria/automovilismo/' | url }}">Automovilismo</a>
+        <a href="{{ '/categoria/otros-deportes/' | url }}">Otros Deportes</a>
+      </nav>
+    </header>
+
+    <hr style="margin:14px 0;">
+
     {{ content | safe }}
+
   </main>
 </body>
 </html>
