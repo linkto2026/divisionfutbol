@@ -16,11 +16,25 @@ module.exports = function (eleventyConfig) {
   });
 
   // Filtrar colección por un valor (ej: data.category == "Selección")
-  eleventyConfig.addFilter("filterby", (arr, keyPath, value) => {
-    if (!Array.isArray(arr)) return [];
-    const get = (obj, path) =>
-      path.split(".").reduce((o, k) => (o ? o[k] : undefined), obj);
-    return arr.filter((item) => get(item, keyPath) === value);
+eleventyConfig.addFilter("filterby", (arr, keyPath, value) => {
+  if (!Array.isArray(arr)) return [];
+
+  const get = (obj, path) =>
+    path.split(".").reduce((o, k) => (o ? o[k] : undefined), obj);
+
+  const norm = (v) => {
+    if (v === undefined || v === null) return "";
+    return String(v)
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, ""); // quita tildes
+  };
+
+  const target = norm(value);
+
+  return arr.filter((item) => norm(get(item, keyPath)) === target);
+  
   });
 
   // Posts ordenados por fecha (más nuevo primero)
