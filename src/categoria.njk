@@ -7,48 +7,26 @@ pagination:
 permalink: "categoria/{{ cat.slug }}/index.html"
 ---
 
-{# -------------------------------------------
-   Config
--------------------------------------------- #}
-{% set pageSize = 10 %}
-
-{# Posts de esta categoría (ya vienen ordenados por fecha en collections.posts) #}
-{% set items = collections.posts | filterby("data.category", cat.name) %}
-
-{# Cantidad de páginas para esta categoría #}
-{% set totalPages = (items.length / pageSize) | round(0, "ceil") %}
-
-{# Número de página actual (por query param no se puede en estático, así que usaremos /page/2/ con un archivo extra) #}
-
 <h1>{{ cat.name }}</h1>
 
-{% if items.length == 0 %}
+{% set results = [] %}
+
+{# Recorremos posts y comparamos por slug #}
+{% for post in collections.posts %}
+  {% if (post.data.category | slug) == cat.slug %}
+    {% set results = (results.push(post), results) %}
+  {% endif %}
+{% endfor %}
+
+{% if results.length == 0 %}
   <p>No hay noticias aún en esta categoría.</p>
 {% else %}
-
-  {# Página 1 (index) muestra los primeros 10 #}
-  <ul>
-    {% for post in items | slice(0, pageSize) %}
-      <li style="margin-bottom:14px;">
-        <a href="{{ post.url | url }}" style="font-weight:700;">
-          {{ post.data.title }}
-        </a>
-        <div style="font-size:14px;color:#555;">
-          {{ post.data.date | date }}
-        </div>
+  <ul class="list">
+    {% for post in results %}
+      <li>
+        <a href="{{ post.url | url }}"><strong>{{ post.data.title }}</strong></a>
+        <div class="meta">{{ post.data.date | date }}</div>
       </li>
     {% endfor %}
   </ul>
-
-  {% if totalPages > 1 %}
-    <hr style="margin:16px 0;">
-    <nav style="display:flex;justify-content:space-between;gap:12px;">
-      <div></div>
-      <div style="color:#555;">Página 1 de {{ totalPages }}</div>
-      <div style="text-align:right;">
-        <a href="{{ ('/categoria/' ~ cat.slug ~ '/page/2/') | url }}">Siguiente →</a>
-      </div>
-    </nav>
-  {% endif %}
-
 {% endif %}
