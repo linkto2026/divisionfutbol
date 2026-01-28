@@ -2,8 +2,9 @@ module.exports = function (eleventyConfig) {
   // Copiar carpetas estáticas
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
+  eleventyConfig.addPassthroughCopy({ "src/js": "js" }); // ✅ necesario para el slider
 
-  // Filtro fecha seguro
+  // Filtro fecha seguro (YYYY-MM-DD)
   eleventyConfig.addFilter("date", (value) => {
     if (!value) return "";
     const d = new Date(value);
@@ -49,12 +50,13 @@ module.exports = function (eleventyConfig) {
     return map;
   });
 
-  // Destacadas
+  // Destacadas (máximo 5, ordenadas por fecha)
   eleventyConfig.addCollection("featuredPosts", (collectionApi) => {
     return collectionApi
       .getFilteredByGlob("src/posts/**/*.md")
       .filter((p) => p.data && p.data.featured === true && p.data.date)
-      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+      .slice(0, 5);
   });
 
   return {
