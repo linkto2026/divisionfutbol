@@ -2,8 +2,7 @@
 layout: layouts/post.njk
 title: "FEBAD CONFIRMA CALENDARIO AUTOMOVILISMO Y EL CODASUR SE MANTIENE EN SUCRE"
 date: 2026-01-27
-- category: "automovilismo"
-+ category: "Automovilismo"
+category: "Automovilismo"
 featured: false
 cover: /uploads/RallyCODA.jpg
 excerpt: "Rally y circuitos marcarán la temporada 2026 del automovilismo boliviano, con Sucre ratificada como sede del Codasur."
