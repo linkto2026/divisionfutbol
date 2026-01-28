@@ -3,31 +3,50 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
 
-  // Fecha segura (YYYY-MM-DD)
+  // Filtro fecha seguro
   eleventyConfig.addFilter("date", (value) => {
     if (!value) return "";
     const d = new Date(value);
     return d.toISOString().split("T")[0];
   });
 
-  // Slug: quita tildes, espacios, mayúsculas -> "Automovilismo" => "automovilismo"
-  eleventyConfig.addFilter("slug", (value) => {
-    if (!value) return "";
-    return String(value)
+  // Helper para normalizar texto (categorías)
+  const normalize = (str = "") =>
+    str
+      .toString()
       .trim()
       .toLowerCase()
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // quita tildes
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
-  });
+      .replace(/[\u0300-\u036f]/g, "");
 
-  // Posts ordenados por fecha
+  // Colección principal de posts
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi
       .getFilteredByGlob("src/posts/**/*.md")
       .filter((p) => p.data && p.data.date)
       .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+  });
+
+  // Colecciones por categoría
+  eleventyConfig.addCollection("byCategory", (collectionApi) => {
+    const posts = collectionApi
+      .getFilteredByGlob("src/posts/**/*.md")
+      .filter((p) => p.data && p.data.category);
+
+    const map = {};
+
+    posts.forEach((post) => {
+      const key = normalize(post.data.category);
+      if (!map[key]) map[key] = [];
+      map[key].push(post);
+    });
+
+    // ordenar cada categoría por fecha
+    Object.keys(map).forEach((key) => {
+      map[key].sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+    });
+
+    return map;
   });
 
   // Destacadas
@@ -39,7 +58,11 @@ module.exports = function (eleventyConfig) {
   });
 
   return {
-    dir: { input: "src", includes: "_includes", output: "_site" },
+    dir: {
+      input: "src",
+      includes: "_includes",
+      output: "_site",
+    },
     templateFormats: ["md", "njk", "html"],
     pathPrefix: "/divisionfutbol/",
   };
