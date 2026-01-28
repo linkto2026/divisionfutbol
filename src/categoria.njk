@@ -9,22 +9,18 @@ permalink: "categoria/{{ cat.slug }}/index.html"
 
 <h1>{{ cat.name }}</h1>
 
-{% set results = [] %}
+{% set key = cat.slug %}
+{% set items = collections.byCategory[key] or [] %}
 
-{# Recorremos posts y comparamos por slug #}
-{% for post in collections.posts %}
-  {% if (post.data.category | slug) == cat.slug %}
-    {% set results = (results.push(post), results) %}
-  {% endif %}
-{% endfor %}
-
-{% if results.length == 0 %}
+{% if items.length == 0 %}
   <p>No hay noticias aún en esta categoría.</p>
 {% else %}
   <ul class="list">
-    {% for post in results %}
+    {% for post in items %}
       <li>
-        <a href="{{ post.url | url }}"><strong>{{ post.data.title }}</strong></a>
+        <a href="{{ post.url | url }}">
+          <strong>{{ post.data.title }}</strong>
+        </a>
         <div class="meta">{{ post.data.date | date }}</div>
       </li>
     {% endfor %}
