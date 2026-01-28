@@ -1,171 +1,213 @@
-:root {
-  --bg: #ffffff;
-  --text: #111111;
-  --muted: #6b7280;
-  --line: #e5e7eb;
+:root{
+  --bg:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --line:#e5e7eb;
+  --card:#ffffff;
+  --accent:#0f172a;
 }
 
-* { box-sizing: border-box; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
 
-html, body { margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1.65;
+body{
+  background:var(--bg);
+  color:var(--text);
+  /* lectura editorial */
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  line-height:1.7;
 }
 
-/* LINKS */
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* links */
+a{ color:inherit; text-decoration:none; }
+a:hover{ text-decoration:underline; }
 
-/* CONTENEDOR */
-.container {
-  max-width: 900px;
+/* layout */
+.container{
+  max-width: 920px;
   margin: 0 auto;
-  padding: 32px 20px;
+  padding: 34px 20px;
 }
 
-/* HEADER */
-.header {
+/* header */
+.header{
+  background:#fff;
   border-bottom: 1px solid var(--line);
-  background: #fff;
 }
 
-.header-inner {
+.header-inner{
   max-width: 1100px;
   margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  padding: 18px 20px;
+  display:flex;
+  gap:18px;
+  align-items:center;
+  justify-content:space-between;
 }
 
-/* MARCA */
-.brand {
-  font-family: system-ui, sans-serif;
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: .4px;
+.brand{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: .3px;
+  font-size: 18px;
+
+  /* deja “espacio” para logo futuro */
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height: 34px;
 }
 
-/* NAV */
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-family: system-ui, sans-serif;
-  font-size: 14px;
+/* nav sobrio: sin “botones” */
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:center;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 13px;
 }
 
 .nav a,
-.nav summary {
+.nav summary{
   color: var(--muted);
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
 }
 
 .nav a:hover,
-.nav summary:hover {
+.nav summary:hover{
   color: var(--text);
+  text-decoration:none;
+  border-bottom-color: rgba(15,23,42,.25);
 }
 
-/* DROPDOWN ACF (hover desktop + tap mobile) */
-.nav-drop { position: relative; }
-
-.nav-drop summary {
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
+/* dropdown ACF */
+.nav-drop{ position:relative; }
+.nav-drop summary{
+  cursor:pointer;
+  list-style:none;
+  user-select:none;
 }
-.nav-drop summary::-webkit-details-marker { display: none; }
+.nav-drop summary::-webkit-details-marker{ display:none; }
 
-.nav-drop-menu {
-  position: absolute;
-  top: 28px;
-  left: 0;
-  background: #fff;
-  border: 1px solid var(--line);
-  padding: 10px;
-  min-width: 160px;
-  display: grid;
-  gap: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transition: .15s ease;
-  z-index: 10;
+.nav-drop-menu{
+  position:absolute;
+  top: 34px;
+  left: -8px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius: 12px;
+  padding:10px;
+  min-width: 170px;
+  display:grid;
+  gap:8px;
+  z-index:10;
+  box-shadow: 0 10px 30px rgba(15,23,42,.08);
+
+  opacity:0;
+  visibility:hidden;
+  transform: translateY(-6px);
+  transition: .16s ease;
 }
 
 .nav-drop:hover .nav-drop-menu,
-.nav-drop[open] .nav-drop-menu {
-  opacity: 1;
-  visibility: visible;
+.nav-drop[open] .nav-drop-menu{
+  opacity:1;
+  visibility:visible;
+  transform: translateY(0);
 }
 
-.nav-drop-menu a { color: var(--muted); }
-.nav-drop-menu a:hover { color: var(--text); text-decoration: none; }
-
-/* HOME */
-.h1 { font-size: 30px; margin-bottom: 12px; }
-
-.meta {
-  font-size: 13px;
+.nav-drop-menu a{
   color: var(--muted);
-  margin-bottom: 10px;
+  padding:6px 8px;
+  border-radius: 8px;
+}
+.nav-drop-menu a:hover{
+  background:#f1f5f9;
+  color: var(--text);
+  text-decoration:none;
 }
 
-.hr {
-  border: 0;
-  border-top: 1px solid var(--line);
-  margin: 18px 0;
+/* tipografía editorial */
+.h1{
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 4px 0 14px;
 }
 
-/* FEATURED */
-.featured img {
-  width: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  margin-bottom: 14px;
+.meta{
+  font-size: 12px;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-.featured h2 {
-  font-size: 26px;
-  margin: 0 0 6px;
+.hr{
+  border:0;
+  border-top:1px solid var(--line);
+  margin:18px 0;
 }
 
-/* LISTADO */
-.list { list-style: none; padding: 0; margin: 0; }
-
-.list li {
+/* listado */
+.list{ list-style:none; padding:0; margin:0; }
+.list li{
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
 }
+.list li:last-child{ border-bottom:0; }
 
-/* POST */
-.post h1 {
-  font-size: 34px;
-  line-height: 1.25;
-  margin: 0 0 10px;
+.list li a strong{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: .1px;
 }
 
-.post-cover {
-  width: 100%;
+/* featured */
+.featured img{
+  width:100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  margin-bottom: 14px;
+}
+
+.featured h2{
+  margin: 0 0 8px;
+  font-size: 28px;
+  line-height:1.15;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 900;
+}
+
+/* post */
+.post h1{
+  margin: 0 0 10px;
+  font-size: 38px;
+  line-height: 1.15;
+}
+
+.post-cover{
+  width:100%;
   max-height: 460px;
   object-fit: cover;
-  margin-bottom: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  margin: 0 0 18px;
 }
 
-/* FOOTER */
-.footer {
+/* footer */
+.footer{
   border-top: 1px solid var(--line);
-  padding: 20px;
-  text-align: center;
-  font-size: 13px;
+  padding: 18px 20px;
+  text-align:center;
   color: var(--muted);
-  font-family: system-ui, sans-serif;
+  font-size: 12px;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-/* RESPONSIVE */
-@media (max-width: 760px) {
-  .header-inner { flex-direction: column; align-items: flex-start; }
+@media (max-width: 760px){
+  .header-inner{ flex-direction:column; align-items:flex-start; }
+  .h1{ font-size: 28px; }
+  .post h1{ font-size: 32px; }
 }
