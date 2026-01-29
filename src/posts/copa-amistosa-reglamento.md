@@ -3,8 +3,8 @@ layout: layouts/post.njk
 title: "El Torneo De Verano Se Juega Con Reglamentación Flexible Y Sin Restricciones"
 date: 2026-01-28
 category: "Division Profesional"
-featured: false
-cover: /upload/ope-pro.jpg
+featured: true
+cover: /uploads/ope-pro.jpg
 excerpt: "La FBF establece normas especiales para el certamen preparatorio, con listas abiertas, libertad de alineación y sin exigencias juveniles."
 ---
 
