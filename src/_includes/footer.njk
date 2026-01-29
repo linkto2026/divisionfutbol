@@ -47,7 +47,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>© 2026 División Fútbol. Todos los derechos reservados.</p>
+      <p>© <span id="year"></span> División Fútbol. Todos los derechos reservados.</p>
 
       <button class="to-top" type="button"
         onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -55,4 +55,7 @@
       </button>
     </div>
   </div>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </footer>
