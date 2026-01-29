@@ -3,16 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ title or "División Fútbol" }}</title>
 
-  <!-- CSS con url filter (ideal para GitHub Pages + pathPrefix) -->
+  {# ---------- TITLE ---------- #}
+  <title>
+    {% if title %}{{ title }} | División Fútbol{% else %}División Fútbol{% endif %}
+  </title>
+
+  {# ---------- SEO / SOCIAL PREVIEW (OPEN GRAPH NIVEL 2) ---------- #}
+  {% set metaTitle = title ? (title ~ " | División Fútbol") : "División Fútbol" %}
+  {% set metaDescription = excerpt or description or site.defaultDescription %}
+  {% set metaImage = cover or image or site.defaultOgImage %}
+
+  <meta name="description" content="{{ metaDescription }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta property="og:description" content="{{ metaDescription }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url | url }}">
+  <meta property="og:image" content="{{ site.url }}{{ metaImage | url }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ metaImage | url }}">
+
+  {# ---------- CSS ---------- #}
   <link rel="stylesheet" href="{{ '/css/styles.css' | url }}">
 </head>
+
 <body>
 
 <header class="header">
   <div class="header-inner">
-    <!-- Marca / Logo -->
     <a class="brand" href="{{ '/' | url }}">
       División Fútbol
     </a>
@@ -43,7 +66,6 @@
   {{ content | safe }}
 </main>
 
-{# Footer pro (4 columnas + redes + subir) #}
 {% include "footer.njk" %}
 
 </body>
