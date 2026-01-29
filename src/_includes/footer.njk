@@ -18,20 +18,19 @@
       <div class="footer-col">
         <h3 class="footer-title">Deportes</h3>
         <ul class="footer-links">
-          <li><a href="/categoria/futbol/">Fútbol</a></li>
-          <li><a href="/categoria/baloncesto/">Baloncesto</a></li>
-          <li><a href="/categoria/tenis/">Tenis</a></li>
-          <li><a href="/categoria/motor/">Automovilismo</a></li>
+          <li><a href="{{ '/categoria/futbol/' | url }}">Fútbol</a></li>
+          <li><a href="{{ '/categoria/baloncesto/' | url }}">Baloncesto</a></li>
+          <li><a href="{{ '/categoria/tenis/' | url }}">Tenis</a></li>
+          <li><a href="{{ '/categoria/automovilismo/' | url }}">Automovilismo</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h3 class="footer-title">Secciones</h3>
         <ul class="footer-links">
-          <li><a href="/noticias/">Noticias</a></li>
-          <li><a href="/destacadas/">Destacadas</a></li>
-          <li><a href="/categorias/">Categorías</a></li>
-          <li><a href="/contacto/">Contacto</a></li>
+          <li><a href="{{ '/' | url }}">Inicio</a></li>
+          <li><a href="{{ '/categorias/' | url }}">Categorías</a></li>
+          <li><a href="{{ '/contacto/' | url }}">Contacto</a></li>
         </ul>
       </div>
 
@@ -43,13 +42,15 @@
           <li><span>📍</span> Santa Cruz, Bolivia</li>
         </ul>
 
-        <a class="footer-cta" href="/contacto/">Escribinos</a>
+        <a class="footer-cta" href="{{ '/contacto/' | url }}">Escribinos</a>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© {{ "now" | date: "%Y" }} División Fútbol. Todos los derechos reservados.</p>
-      <button class="to-top" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <p>© 2026 División Fútbol. Todos los derechos reservados.</p>
+
+      <button class="to-top" type="button"
+        onclick="window.scrollTo({top:0,behavior:'smooth'})">
         Subir ↑
       </button>
     </div>
