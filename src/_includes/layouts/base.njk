@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   {# ---------- TITLE ---------- #}
-  <title>
-    {% if title %}{{ title }} | División Fútbol{% else %}División Fútbol{% endif %}
-  </title>
+  <title>{% if title %}{{ title }} | División Fútbol{% else %}División Fútbol{% endif %}</title>
 
   {# ---------- SEO / SOCIAL PREVIEW (OPEN GRAPH NIVEL 2) ---------- #}
-  {% set metaTitle = title ? (title ~ " | División Fútbol") : "División Fútbol" %}
-  {% set metaDescription = excerpt or description or site.defaultDescription %}
-  {% set metaImage = cover or image or site.defaultOgImage %}
+  {% set metaTitle = "División Fútbol" %}
+  {% if title %}{% set metaTitle = title ~ " | División Fútbol" %}{% endif %}
+
+  {% set metaDescription = site.defaultDescription %}
+  {% if description %}{% set metaDescription = description %}{% endif %}
+  {% if excerpt %}{% set metaDescription = excerpt %}{% endif %}
+
+  {% set metaImage = site.defaultOgImage %}
+  {% if image %}{% set metaImage = image %}{% endif %}
+  {% if cover %}{% set metaImage = cover %}{% endif %}
 
   <meta name="description" content="{{ metaDescription }}">
 
@@ -36,9 +41,7 @@
 
 <header class="header">
   <div class="header-inner">
-    <a class="brand" href="{{ '/' | url }}">
-      División Fútbol
-    </a>
+    <a class="brand" href="{{ '/' | url }}">División Fútbol</a>
 
     <nav class="nav">
       <a href="{{ '/' | url }}">Inicio</a>
