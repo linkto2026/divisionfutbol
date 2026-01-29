@@ -9,29 +9,48 @@ pagination:
 
 <h1 class="h1">Últimas noticias</h1>
 
-{% set featured = collections.featuredPosts[0] %}
+{% set featuredList = collections.featuredPosts %}
 
-{% if featured %}
-  <section class="featured">
-    {% if featured.data.cover %}
-      <img src="{{ featured.data.cover | url }}" alt="{{ featured.data.title }}">
-    {% endif %}
+{% if featuredList and featuredList.length %}
+  <section class="featured-slider" data-featured-slider data-interval="4500">
 
-    <h2>
-      <a href="{{ featured.url | url }}">{{ featured.data.title }}</a>
-    </h2>
+    {% for post in featuredList %}
+      <article class="featured-slide {% if loop.first %}is-active{% endif %}" data-slide>
+        {% if post.data.cover %}
+          <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}">
+        {% endif %}
 
-    <div class="meta">
-      {{ featured.data.date | date }}
-      {% if featured.data.category %} · {{ featured.data.category }}{% endif %}
+        <div class="meta">
+          {{ post.data.date | date }}
+          {% if post.data.category %} · {{ post.data.category }}{% endif %}
+        </div>
+
+        <h2>
+          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+        </h2>
+
+        {% if post.data.excerpt %}
+          <p>{{ post.data.excerpt }}</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+
+    <div class="featured-dots" aria-label="Destacadas">
+      {% for post in featuredList %}
+        <button
+          class="dot {% if loop.first %}is-active{% endif %}"
+          type="button"
+          aria-label="Ir a destacada {{ loop.index }}"
+          data-dot
+        ></button>
+      {% endfor %}
     </div>
 
-    {% if featured.data.excerpt %}
-      <p>{{ featured.data.excerpt }}</p>
-    {% endif %}
   </section>
 
   <div class="hr"></div>
+
+  <script src="{{ '/js/featured-slider.js' | url }}"></script>
 {% endif %}
 
 <ul class="list">
