@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ title or "División Fútbol" }}</title>
+
+  <!-- CSS con url filter (ideal para GitHub Pages + pathPrefix) -->
   <link rel="stylesheet" href="{{ '/css/styles.css' | url }}">
 </head>
 <body>
@@ -12,7 +14,6 @@
   <div class="header-inner">
     <!-- Marca / Logo -->
     <a class="brand" href="{{ '/' | url }}">
-      <!-- Más adelante acá va <img src="/logo.svg"> -->
       División Fútbol
     </a>
 
@@ -42,9 +43,8 @@
   {{ content | safe }}
 </main>
 
-<footer class="footer">
-  <p>© División Fútbol · Medio digital independiente</p>
-</footer>
+{# Footer pro (4 columnas + redes + subir) #}
+{% include "footer.njk" %}
 
 </body>
 </html>
