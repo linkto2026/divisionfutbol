@@ -11,16 +11,20 @@ module.exports = function (eleventyConfig) {
     return d.toISOString().split("T")[0];
   });
 
-  // Helper para normalizar texto (categorías)
-  const normalize = (str = "") =>
+  // Helper para convertir cualquier texto a slug de categoría
+  // Ej: "División Profesional" -> "division-profesional"
+  // Ej: "ACF Primera B" -> "acf-primera-b"
+  const toSlug = (str = "") =>
     str
       .toString()
       .trim()
       .toLowerCase()
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
 
-  // Colección principal de posts
+  // Colección principal de posts (ordenados por fecha desc)
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi
       .getFilteredByGlob("src/posts/**/*.md")
@@ -28,7 +32,7 @@ module.exports = function (eleventyConfig) {
       .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
   });
 
-  // Colecciones por categoría
+  // Colecciones por categoría (key = slug)
   eleventyConfig.addCollection("byCategory", (collectionApi) => {
     const posts = collectionApi
       .getFilteredByGlob("src/posts/**/*.md")
@@ -37,12 +41,12 @@ module.exports = function (eleventyConfig) {
     const map = {};
 
     posts.forEach((post) => {
-      const key = normalize(post.data.category);
+      const key = toSlug(post.data.category);
       if (!map[key]) map[key] = [];
       map[key].push(post);
     });
 
-    // ordenar cada categoría por fecha
+    // Ordenar cada categoría por fecha desc
     Object.keys(map).forEach((key) => {
       map[key].sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
     });
@@ -50,7 +54,7 @@ module.exports = function (eleventyConfig) {
     return map;
   });
 
-  // Destacadas (máximo 5, ordenadas por fecha)
+  // Destacadas (máximo 5, ordenadas por fecha desc)
   eleventyConfig.addCollection("featuredPosts", (collectionApi) => {
     return collectionApi
       .getFilteredByGlob("src/posts/**/*.md")
