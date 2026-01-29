@@ -4,10 +4,10 @@ pagination:
   data: categories
   size: 1
   alias: cat
-permalink: "categoria/{{ cat.slug }}/index.html"
+permalink: "/categoria/{{ cat.slug }}/index.html"
 ---
 
-<h1>{{ cat.name }}</h1>
+<h1 class="h1">{{ cat.name }}</h1>
 
 {% set key = cat.slug %}
 {% set items = collections.byCategory[key] or [] %}
@@ -15,14 +15,47 @@ permalink: "categoria/{{ cat.slug }}/index.html"
 {% if items.length == 0 %}
   <p>No hay noticias aún en esta categoría.</p>
 {% else %}
-  <ul class="list">
-    {% for post in items %}
-      <li>
-        <a href="{{ post.url | url }}">
-          <strong>{{ post.data.title }}</strong>
-        </a>
-        <div class="meta">{{ post.data.date | date }}</div>
-      </li>
-    {% endfor %}
-  </ul>
+
+  <section class="home-section">
+    <div class="post-grid">
+
+      {% for post in items %}
+        <article class="post-card">
+
+          <div class="post-card__image">
+            {% if post.data.cover %}
+              <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
+            {% endif %}
+
+            <span class="post-card__category">
+              {{ cat.name }}
+            </span>
+          </div>
+
+          <div class="post-card__content">
+            <h3 class="post-card__title">
+              <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+            </h3>
+
+            <div class="post-card__meta">
+              <span>{{ post.data.date | date }}</span>
+            </div>
+
+            {% if post.data.excerpt %}
+              <p class="post-card__excerpt">
+                {{ post.data.excerpt }}
+              </p>
+            {% endif %}
+
+            <a class="post-card__btn" href="{{ post.url | url }}">
+              Leer más →
+            </a>
+          </div>
+
+        </article>
+      {% endfor %}
+
+    </div>
+  </section>
+
 {% endif %}
