@@ -9,67 +9,109 @@ pagination:
 
 <h1 class="h1">Últimas noticias</h1>
 
+{# =========================
+   SLIDER DE DESTACADAS
+   ========================= #}
+
 {% set featuredList = collections.featuredPosts %}
 
 {% if featuredList and featuredList.length %}
-  <section class="featured-slider" data-featured-slider data-interval="4500">
+<section class="featured-slider" data-featured-slider data-interval="4500">
 
+  {% for post in featuredList %}
+    <article class="featured-slide {% if loop.first %}is-active{% endif %}" data-slide>
+      {% if post.data.cover %}
+        <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}">
+      {% endif %}
+
+      <div class="meta">
+        {{ post.data.date | date }}
+        {% if post.data.category %} · {{ post.data.category | replace("-", " ") | capitalize }}{% endif %}
+      </div>
+
+      <h2>
+        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+      </h2>
+
+      {% if post.data.excerpt %}
+        <p>{{ post.data.excerpt }}</p>
+      {% endif %}
+    </article>
+  {% endfor %}
+
+  <div class="featured-dots" aria-label="Destacadas">
     {% for post in featuredList %}
-      <article class="featured-slide {% if loop.first %}is-active{% endif %}" data-slide>
-        {% if post.data.cover %}
-          <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}">
-        {% endif %}
-
-        <div class="meta">
-          {{ post.data.date | date }}
-          {% if post.data.category %} · {{ post.data.category }}{% endif %}
-        </div>
-
-        <h2>
-          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-        </h2>
-
-        {% if post.data.excerpt %}
-          <p>{{ post.data.excerpt }}</p>
-        {% endif %}
-      </article>
+      <button
+        class="dot {% if loop.first %}is-active{% endif %}"
+        type="button"
+        aria-label="Ir a destacada {{ loop.index }}"
+        data-dot
+      ></button>
     {% endfor %}
+  </div>
 
-    <div class="featured-dots" aria-label="Destacadas">
-      {% for post in featuredList %}
-        <button
-          class="dot {% if loop.first %}is-active{% endif %}"
-          type="button"
-          aria-label="Ir a destacada {{ loop.index }}"
-          data-dot
-        ></button>
-      {% endfor %}
-    </div>
+</section>
 
-  </section>
-
-  <div class="hr"></div>
-
-  <script src="{{ '/js/featured-slider.js' | url }}"></script>
+<script src="{{ '/js/featured-slider.js' | url }}"></script>
+<div class="hr"></div>
 {% endif %}
 
-<ul class="list">
-  {% for post in postsPage %}
-    {% if not post.data.featured %}
-      <li>
-        <a href="{{ post.url | url }}"><strong>{{ post.data.title }}</strong></a>
-        <div class="meta">
-          {{ post.data.date | date }}
-          {% if post.data.category %} · {{ post.data.category }}{% endif %}
+{# =========================
+   GRID DE NOTAS (CARDS)
+   ========================= #}
+
+<section class="home-section">
+  <div class="post-grid">
+
+    {% for post in postsPage %}
+      {% if not post.data.featured %}
+      <article class="post-card">
+
+        <div class="post-card__image">
+          {% if post.data.cover %}
+            <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
+          {% endif %}
+          {% if post.data.category %}
+            <span class="post-card__category">
+              {{ post.data.category | replace("-", " ") | capitalize }}
+            </span>
+          {% endif %}
         </div>
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
+
+        <div class="post-card__content">
+          <h3 class="post-card__title">
+            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+          </h3>
+
+          <div class="post-card__meta">
+            <span>{{ post.data.date | date }}</span>
+          </div>
+
+          {% if post.data.excerpt %}
+            <p class="post-card__excerpt">
+              {{ post.data.excerpt }}
+            </p>
+          {% endif %}
+
+          <a class="post-card__btn" href="{{ post.url | url }}">
+            Leer más →
+          </a>
+        </div>
+
+      </article>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+</section>
 
 <div class="hr"></div>
 
-<nav class="meta" style="display:flex;justify-content:space-between;">
+{# =========================
+   PAGINACIÓN
+   ========================= #}
+
+<nav class="pagination">
   <div>
     {% if pagination.href.previous %}
       <a href="{{ pagination.href.previous | url }}">← Anterior</a>
