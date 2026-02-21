@@ -1,0 +1,44 @@
+# Opcional (link al sitio)
+site_url: "https://TUUSUARIO.github.io/divisionfutbol/"
+
+# ✅ BACKEND: esto te lo genera DecapBridge (pegá tu snippet aquí)
+backend:
+  name: git-gateway
+  repo: TUORG_O_USUARIO/TUREPO
+  branch: main
+  identity_url: https://auth.decapbridge.com/sites/TU_SITE_ID
+  gateway_url: https://gateway.decapbridge.com
+
+# ✅ Para que NO rompan nada: que trabajen con PRs / borradores (recomendado)
+publish_mode: editorial_workflow
+
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "posts"
+    label: "Notas"
+    folder: "src/posts"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{date}} · {{title}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        options:
+          - "Selección"
+          - "División Profesional"
+          - "Copa Simón Bolívar"
+          - "ACF Primera A"
+          - "ACF Primera B"
+          - "ACF Ascensos"
+          - "Internacional"
+          - "Automovilismo"
+          - "Otros Deportes"
+      - { label: "Destacada", name: "featured", widget: "boolean", default: false }
+      - { label: "Portada", name: "cover", widget: "image", required: false }
+      - { label: "Bajada (excerpt)", name: "excerpt", widget: "string", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
