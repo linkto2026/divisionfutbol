@@ -1,5 +1,5 @@
 # Opcional (link al sitio)
-site_url: "https://TUUSUARIO.github.io/divisionfutbol/"
+site_url: "https://linkto2026.github.io/divisionfutbol/"
 
 # ✅ BACKEND: esto te lo genera DecapBridge (pegá tu snippet aquí)
 backend:
@@ -13,7 +13,7 @@ backend:
 publish_mode: editorial_workflow
 
 media_folder: "src/uploads"
-public_folder: "/uploads"
+public_folder: "/divisionfutbol/uploads"
 
 collections:
   - name: "posts"
