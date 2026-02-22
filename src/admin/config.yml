@@ -1,7 +1,5 @@
-# Opcional (link al sitio)
 site_url: "https://linkto2026.github.io/divisionfutbol/"
 
-# ✅ BACKEND: esto te lo genera DecapBridge (pegá tu snippet aquí)
 backend:
   name: git-gateway
   repo: linkto2026/divisionfutbol
@@ -9,22 +7,36 @@ backend:
   identity_url: https://auth.decapbridge.com/sites/1576e37c-d0ad-4825-9b88-f34f3a7e4944
   gateway_url: https://gateway.decapbridge.com
 
-# ✅ Para que NO rompan nada: que trabajen con PRs / borradores (recomendado)
+# Para que tus editores trabajen con borradores/PRs (recomendado)
 publish_mode: editorial_workflow
 
+# Dónde se guardan los archivos en el repo
 media_folder: "src/uploads"
+
+# Cómo quedará la ruta en el sitio publicado (GitHub Pages en subcarpeta)
 public_folder: "/divisionfutbol/uploads"
+
+# (Opcional pero recomendable) Evita algunos validadores estrictos
+media_library:
+  name: upload
 
 collections:
   - name: "posts"
     label: "Notas"
     folder: "src/posts"
     create: true
-    slug: "{{slug}}"
+
+    # Evita que dos notas con el mismo título se pisen
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+
     summary: "{{date}} · {{title}}"
+
     fields:
       - { label: "Título", name: "title", widget: "string" }
+
+      # Fecha sin hora (queda limpio para tu web)
       - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
+
       - label: "Categoría"
         name: "category"
         widget: "select"
@@ -38,7 +50,11 @@ collections:
           - "Internacional"
           - "Automovilismo"
           - "Otros Deportes"
+
       - { label: "Destacada", name: "featured", widget: "boolean", default: false }
+
       - { label: "Portada", name: "cover", widget: "image", required: false }
+
       - { label: "Bajada (excerpt)", name: "excerpt", widget: "string", required: false }
+
       - { label: "Contenido", name: "body", widget: "markdown" }
