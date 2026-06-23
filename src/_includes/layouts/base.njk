@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+<script src="{{ '/tinacms/preview.js' | url }}" defer></script>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,7 +37,12 @@
 </head>
 
 <body>
+<script id="tinacms-script">
+  if (window.__TINA_CMS__) {
+    import('/tinacms/editor.js');
+  }
 
+</script>
 <!-- TICKER -->
 <div class="ticker-bar">
   <span class="ticker-label">🔴 En vivo</span>
