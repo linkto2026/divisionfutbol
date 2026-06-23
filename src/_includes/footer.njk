@@ -1,85 +1,58 @@
 <footer class="site-footer">
   <div class="footer-wrap">
     <div class="footer-grid">
+
       <div class="footer-col">
-        <h3 class="footer-title">División Fútbol</h3>
+        <div class="footer-brand">
+          DIVISIÓN FÚTBOL<span class="brand-dot" style="background:var(--accent);width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:4px;"></span>
+        </div>
         <p class="footer-text">
-          Cobertura ACF y fútbol boliviano. Noticias, análisis, resultados y talento joven.
+          Cobertura ACF y fútbol boliviano. Noticias, análisis, resultados y talento joven desde Santa Cruz, Bolivia.
         </p>
-
         <div class="footer-social">
-          <a class="social-btn"
-             href="https://www.facebook.com/divisionfutbolbol"
-             target="_blank" rel="noopener"
-             aria-label="Facebook División Fútbol">
-            FB
-          </a>
-
-          <a class="social-btn"
-             href="https://www.instagram.com/divisionfutbol/"
-             target="_blank" rel="noopener"
-             aria-label="Instagram División Fútbol">
-            IG
-          </a>
-
-          <a class="social-btn"
-             href="https://www.tiktok.com/@divisionfutbol.bo"
-             target="_blank" rel="noopener"
-             aria-label="TikTok División Fútbol">
-            TT
-          </a>
-
-          <a class="social-btn"
-             href="https://www.youtube.com/@DivisionFutbolBolivia"
-             target="_blank" rel="noopener"
-             aria-label="YouTube División Fútbol">
-            YT
-          </a>
+          <a class="social-btn" href="https://www.facebook.com/divisionfutbolbol" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+          <a class="social-btn" href="https://www.instagram.com/divisionfutbol/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a class="social-btn" href="https://www.tiktok.com/@divisionfutbol.bo" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+          <a class="social-btn" href="https://www.youtube.com/@DivisionFutbolBolivia" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
         </div>
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-title">Deportes</h3>
-        <ul class="footer-links">
-          <li><a href="{{ '/categoria/futbol/' | url }}">Fútbol</a></li>
-          <li><a href="{{ '/categoria/baloncesto/' | url }}">Baloncesto</a></li>
-          <li><a href="{{ '/categoria/tenis/' | url }}">Tenis</a></li>
-          <li><a href="{{ '/categoria/automovilismo/' | url }}">Automovilismo</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h3 class="footer-title">Secciones</h3>
+        <h3 class="footer-heading">Secciones</h3>
         <ul class="footer-links">
           <li><a href="{{ '/' | url }}">Inicio</a></li>
-          <li><a href="{{ '/categorias/' | url }}">Categorías</a></li>
-          <li><a href="{{ '/contacto/' | url }}">Contacto</a></li>
+          <li><a href="{{ '/categoria/seleccion/' | url }}">Selección</a></li>
+          <li><a href="{{ '/categoria/division-profesional/' | url }}">División Profesional</a></li>
+          <li><a href="{{ '/categoria/copa-simon-bolivar/' | url }}">Copa Simón Bolívar</a></li>
+          <li><a href="{{ '/categoria/internacional/' | url }}">Internacional</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-title">Contacto</h3>
-        <ul class="footer-meta">
-          <li><span>✉</span> <a href="mailto:divisionfutbol@gmail.com">divisionfutbol@gmail.com</a></li>
-          <li><span>☎</span> <a href="https://wa.me/591XXXXXXXX" target="_blank" rel="noopener">+591 XXXXXXXX</a></li>
-          <li><span>📍</span> Santa Cruz, Bolivia</li>
+        <h3 class="footer-heading">ACF</h3>
+        <ul class="footer-links">
+          <li><a href="{{ '/categoria/acf-primera-a/' | url }}">Primera A</a></li>
+          <li><a href="{{ '/categoria/acf-primera-b/' | url }}">Primera B</a></li>
+          <li><a href="{{ '/categoria/acf-ascensos/' | url }}">Ascensos</a></li>
+          <li><a href="{{ '/categoria/automovilismo/' | url }}">Automovilismo</a></li>
+          <li><a href="{{ '/categoria/otros-deportes/' | url }}">Otros Deportes</a></li>
         </ul>
-
-        <a class="footer-cta" href="{{ '/contacto/' | url }}">Escribinos</a>
       </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Contacto</h3>
+        <ul class="footer-meta">
+          <li><a href="mailto:divisionfutbol@gmail.com">divisionfutbol@gmail.com</a></li>
+          <li>📍 Santa Cruz, Bolivia</li>
+        </ul>
+      </div>
+
     </div>
 
     <div class="footer-bottom">
-      <p>© <span id="year"></span> División Fútbol. Todos los derechos reservados.</p>
-
-      <button class="to-top" type="button"
-        onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        Subir ↑
-      </button>
+      <p>© <span id="year"></span> División Fútbol · Todos los derechos reservados.</p>
+      <button class="to-top" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Subir</button>
     </div>
   </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </footer>

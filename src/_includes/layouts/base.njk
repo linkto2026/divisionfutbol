@@ -4,10 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  {# ---------- TITLE ---------- #}
-  <title>{% if title %}{{ title }} | División Fútbol{% else %}División Fútbol{% endif %}</title>
-
-  {# ---------- SEO / SOCIAL PREVIEW (OPEN GRAPH NIVEL 2) ---------- #}
   {% set metaTitle = "División Fútbol" %}
   {% if title %}{% set metaTitle = title ~ " | División Fútbol" %}{% endif %}
 
@@ -19,30 +15,50 @@
   {% if image %}{% set metaImage = image %}{% endif %}
   {% if cover %}{% set metaImage = cover %}{% endif %}
 
+  <title>{{ metaTitle }}</title>
   <meta name="description" content="{{ metaDescription }}">
-
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.name }}">
   <meta property="og:title" content="{{ metaTitle }}">
   <meta property="og:description" content="{{ metaDescription }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url | url }}">
   <meta property="og:image" content="{{ site.url }}{{ metaImage | url }}">
-
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ metaTitle }}">
   <meta name="twitter:description" content="{{ metaDescription }}">
   <meta name="twitter:image" content="{{ site.url }}{{ metaImage | url }}">
-
-  {# ---------- CSS ---------- #}
-  <link rel="stylesheet" href="{{ '/css/styles.css' | url }}">
   <meta name="google-site-verification" content="02DLzyZ3JJqdb75aBQyiBrMiI5kEd6P2vz5BxDRIPzg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/css/styles.css' | url }}">
 </head>
 
 <body>
 
+<!-- TICKER -->
+<div class="ticker-bar">
+  <span class="ticker-label">🔴 En vivo</span>
+  <div class="ticker-track" id="tickerTrack">
+    <span>División Profesional Bolivia 2026 en marcha</span>
+    <span>Selección Verde busca clasificación al Mundial 2026</span>
+    <span>Copa Simón Bolívar — fase de grupos</span>
+    <span>ACF Primera A — jornada en curso</span>
+    <span>CODASUR 2026 confirmado en Sucre</span>
+    <span>División Profesional Bolivia 2026 en marcha</span>
+    <span>Selección Verde busca clasificación al Mundial 2026</span>
+    <span>Copa Simón Bolívar — fase de grupos</span>
+    <span>ACF Primera A — jornada en curso</span>
+    <span>CODASUR 2026 confirmado en Sucre</span>
+  </div>
+</div>
+
 <header class="header">
   <div class="header-inner">
-    <a class="brand" href="{{ '/' | url }}">División Fútbol</a>
+    <a class="brand" href="{{ '/' | url }}">
+      DIVISIÓN FÚTBOL<span class="brand-dot"></span>
+    </a>
 
     <nav class="nav">
       <a href="{{ '/' | url }}">Inicio</a>

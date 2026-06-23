@@ -7,55 +7,115 @@ pagination:
 permalink: "/categoria/{{ cat.slug }}/index.html"
 ---
 
-<h1 class="h1">{{ cat.name }}</h1>
+<div class="cat-header">
+  <h1>{{ cat.name }}</h1>
+</div>
 
 {% set key = cat.slug %}
 {% set items = collections.byCategory[key] or [] %}
 
 {% if items.length == 0 %}
-  <p>No hay noticias aún en esta categoría.</p>
+  <p style="color:var(--muted); font-size:15px;">No hay noticias aún en esta categoría.</p>
 {% else %}
 
-  <section class="home-section">
-    <div class="post-grid">
-
-      {% for post in items %}
-        <article class="post-card">
-
-          <div class="post-card__image">
-            {% if post.data.cover %}
-              <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
-            {% endif %}
-
-            <span class="post-card__category">
-              {{ cat.name }}
-            </span>
-          </div>
-
-          <div class="post-card__content">
-            <h3 class="post-card__title">
-              <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-            </h3>
-
-            <div class="post-card__meta">
-              <span>{{ post.data.date | date }}</span>
+  <div class="home-layout">
+    <section class="home-main">
+      <p class="section-label">{{ items.length }} nota{% if items.length != 1 %}s{% endif %} publicada{% if items.length != 1 %}s{% endif %}</p>
+      <div class="post-grid">
+        {% for post in items %}
+          <article class="post-card">
+            <div class="post-card__image">
+              {% if post.data.cover %}
+                <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
+              {% endif %}
+              <span class="post-card__category">{{ cat.name }}</span>
             </div>
+            <div class="post-card__content">
+              <h3 class="post-card__title">
+                <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+              </h3>
+              <div class="post-card__meta">
+                <span>{{ post.data.date | date }}</span>
+              </div>
+              {% if post.data.excerpt %}
+                <p class="post-card__excerpt">{{ post.data.excerpt }}</p>
+              {% endif %}
+              <a class="post-card__btn" href="{{ post.url | url }}">Leer nota →</a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
 
-            {% if post.data.excerpt %}
-              <p class="post-card__excerpt">
-                {{ post.data.excerpt }}
-              </p>
-            {% endif %}
+    <aside class="home-aside">
 
-            <a class="post-card__btn" href="{{ post.url | url }}">
-              Leer más →
-            </a>
+      {# =============================================
+         TABLAS DE POSICIONES SOFASCORE
+         Aparece solo si la categoría tiene widget
+         ============================================= #}
+
+      {% if cat.slug == "acf-primera-a" %}
+        <p class="section-label">Tabla de posiciones</p>
+        <div class="sofascore-widget">
+          <iframe
+            id="sofa-standings-embed-153639-93881"
+            src="https://widgets.sofascore.com/es-ES/embed/tournament/153639/season/93881/standings/Primera%20A%20Santa%20Cruz%202026?widgetTitle=Primera%20A%20Santa%20Cruz%202026&showCompetitionLogo=true"
+            style="height:1203px!important;max-width:100%!important;width:100%!important;"
+            frameborder="0"
+            scrolling="no"
+          ></iframe>
+          <div class="sofascore-credit">
+            Clasificación ofrecida por <a target="_blank" href="https://www.sofascore.com/es/football/tournament/bolivia/primera-a-santa-cruz/26929#id:93881" rel="noopener">Sofascore</a>
           </div>
+        </div>
 
-        </article>
-      {% endfor %}
+      {% elif cat.slug == "acf-primera-b" %}
+        <p class="section-label">Tabla de posiciones</p>
+        <div class="sofascore-widget">
+          <iframe
+            id="sofa-standings-embed-184577-93882"
+            src="https://widgets.sofascore.com/es-ES/embed/tournament/184577/season/93882/standings/Primera%20B%20Santa%20Cruz%202026?widgetTitle=Primera%20B%20Santa%20Cruz%202026&showCompetitionLogo=true"
+            style="height:1123px!important;max-width:100%!important;width:100%!important;"
+            frameborder="0"
+            scrolling="no"
+          ></iframe>
+          <div class="sofascore-credit">
+            Clasificación ofrecida por <a target="_blank" href="https://www.sofascore.com/es/football/tournament/bolivia/primera-b-santa-cruz/27334#id:93882" rel="noopener">Sofascore</a>
+          </div>
+        </div>
 
-    </div>
-  </section>
+      {% elif cat.slug == "division-profesional" %}
+        <p class="section-label">Tabla de posiciones</p>
+        <div class="sofascore-widget">
+          <iframe
+            id="sofa-standings-embed-4330-92509"
+            src="https://widgets.sofascore.com/es-ES/embed/tournament/4330/season/92509/standings/Division%20Profesional%202026?widgetTitle=Division%20Profesional%202026&showCompetitionLogo=true"
+            style="height:963px!important;max-width:100%!important;width:100%!important;"
+            frameborder="0"
+            scrolling="no"
+          ></iframe>
+          <div class="sofascore-credit">
+            Clasificación ofrecida por <a target="_blank" href="https://www.sofascore.com/es/football/tournament/bolivia/division-profesional/16736#id:92509" rel="noopener">Sofascore</a>
+          </div>
+        </div>
+
+      {% else %}
+        {# Para categorías sin tabla: pills de navegación #}
+        <p class="section-label">Otras categorías</p>
+        <div class="cat-pills">
+          <a class="cat-pill" href="{{ '/categoria/seleccion/' | url }}">Selección</a>
+          <a class="cat-pill" href="{{ '/categoria/division-profesional/' | url }}">Div Pro</a>
+          <a class="cat-pill" href="{{ '/categoria/copa-simon-bolivar/' | url }}">Simón Bolívar</a>
+          <a class="cat-pill" href="{{ '/categoria/internacional/' | url }}">Internacional</a>
+          <a class="cat-pill" href="{{ '/categoria/automovilismo/' | url }}">Automovilismo</a>
+          <a class="cat-pill" href="{{ '/categoria/acf-primera-a/' | url }}">ACF Primera A</a>
+          <a class="cat-pill" href="{{ '/categoria/acf-primera-b/' | url }}">Primera B</a>
+          <a class="cat-pill" href="{{ '/categoria/acf-ascensos/' | url }}">Ascensos</a>
+          <a class="cat-pill" href="{{ '/categoria/otros-deportes/' | url }}">Otros</a>
+        </div>
+      {% endif %}
+
+    </aside>
+  </div>
 
 {% endif %}

@@ -7,16 +7,12 @@ pagination:
   alias: postsPage
 ---
 
-<h1 class="h1">Últimas noticias</h1>
-
-{# =========================
-   SLIDER DE DESTACADAS
-   ========================= #}
+{# ========================= SLIDER DESTACADAS ========================= #}
 
 {% set featuredList = collections.featuredPosts %}
 
 {% if featuredList and featuredList.length %}
-<section class="featured-slider" data-featured-slider data-interval="4500">
+<section class="featured-slider" data-featured-slider data-interval="5000">
 
   {% for post in featuredList %}
     <article class="featured-slide {% if loop.first %}is-active{% endif %}" data-slide>
@@ -24,107 +20,119 @@ pagination:
         <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}">
       {% endif %}
 
-      <div class="meta">
-        {{ post.data.date | date }}
-        {% if post.data.category %} · {{ post.data.category | replace("-", " ") | capitalize }}{% endif %}
+      <div class="featured-slide-body">
+        {% if post.data.category %}
+          <span class="featured-badge">{{ post.data.category | replace("-", " ") | capitalize }}</span>
+        {% endif %}
+        <h2 class="featured-title">
+          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+        </h2>
+        {% if post.data.excerpt %}
+          <p class="featured-excerpt">{{ post.data.excerpt }}</p>
+        {% endif %}
+        <div class="featured-meta">{{ post.data.date | date }}</div>
       </div>
-
-      <h2>
-        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-      </h2>
-
-      {% if post.data.excerpt %}
-        <p>{{ post.data.excerpt }}</p>
-      {% endif %}
     </article>
   {% endfor %}
 
   <div class="featured-dots" aria-label="Destacadas">
     {% for post in featuredList %}
-      <button
-        class="dot {% if loop.first %}is-active{% endif %}"
-        type="button"
-        aria-label="Ir a destacada {{ loop.index }}"
-        data-dot
-      ></button>
+      <button class="dot {% if loop.first %}is-active{% endif %}" type="button" aria-label="Ir a destacada {{ loop.index }}" data-dot></button>
     {% endfor %}
   </div>
 
 </section>
-
 <script src="{{ '/js/featured-slider.js' | url }}"></script>
-<div class="hr"></div>
 {% endif %}
 
-{# =========================
-   GRID DE NOTAS (CARDS)
-   ========================= #}
+{# ========================= HOME LAYOUT ========================= #}
 
-<section class="home-section">
-  <div class="post-grid">
+<div class="home-layout">
 
-    {% for post in postsPage %}
-      {% if not post.data.featured %}
-      <article class="post-card">
+  {# --- MAIN: GRILLA DE CARDS --- #}
+  <section class="home-main">
+    <p class="section-label">Últimas noticias</p>
 
-        <div class="post-card__image">
-          {% if post.data.cover %}
-            <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
-          {% endif %}
-          {% if post.data.category %}
-            <span class="post-card__category">
-              {{ post.data.category | replace("-", " ") | capitalize }}
-            </span>
-          {% endif %}
-        </div>
-
-        <div class="post-card__content">
-          <h3 class="post-card__title">
-            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-          </h3>
-
-          <div class="post-card__meta">
-            <span>{{ post.data.date | date }}</span>
+    <div class="post-grid">
+      {% for post in postsPage %}
+        {% if not post.data.featured %}
+        <article class="post-card">
+          <div class="post-card__image">
+            {% if post.data.cover %}
+              <img src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
+            {% endif %}
+            {% if post.data.category %}
+              <span class="post-card__category">{{ post.data.category | replace("-", " ") | capitalize }}</span>
+            {% endif %}
           </div>
+          <div class="post-card__content">
+            <h3 class="post-card__title">
+              <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+            </h3>
+            <div class="post-card__meta">
+              <span>{{ post.data.date | date }}</span>
+            </div>
+            {% if post.data.excerpt %}
+              <p class="post-card__excerpt">{{ post.data.excerpt }}</p>
+            {% endif %}
+            <a class="post-card__btn" href="{{ post.url | url }}">Leer nota →</a>
+          </div>
+        </article>
+        {% endif %}
+      {% endfor %}
+    </div>
 
-          {% if post.data.excerpt %}
-            <p class="post-card__excerpt">
-              {{ post.data.excerpt }}
-            </p>
+    <nav class="pagination">
+      <div>
+        {% if pagination.href.previous %}
+          <a href="{{ pagination.href.previous | url }}">← Anterior</a>
+        {% endif %}
+      </div>
+      <div style="font-size:13px; color:var(--muted);">
+        Página {{ pagination.pageNumber + 1 }} de {{ pagination.pages.length }}
+      </div>
+      <div>
+        {% if pagination.href.next %}
+          <a href="{{ pagination.href.next | url }}">Siguiente →</a>
+        {% endif %}
+      </div>
+    </nav>
+  </section>
+
+  {# --- ASIDE --- #}
+  <aside class="home-aside">
+    <p class="section-label">Categorías</p>
+    <div class="cat-pills" style="margin-bottom:28px;">
+      <a class="cat-pill" href="{{ '/categoria/seleccion/' | url }}">Selección</a>
+      <a class="cat-pill" href="{{ '/categoria/division-profesional/' | url }}">Div Pro</a>
+      <a class="cat-pill" href="{{ '/categoria/copa-simon-bolivar/' | url }}">Simón Bolívar</a>
+      <a class="cat-pill" href="{{ '/categoria/internacional/' | url }}">Internacional</a>
+      <a class="cat-pill" href="{{ '/categoria/automovilismo/' | url }}">Automovilismo</a>
+      <a class="cat-pill" href="{{ '/categoria/acf-primera-a/' | url }}">ACF Primera A</a>
+      <a class="cat-pill" href="{{ '/categoria/acf-primera-b/' | url }}">Primera B</a>
+      <a class="cat-pill" href="{{ '/categoria/acf-ascensos/' | url }}">Ascensos</a>
+      <a class="cat-pill" href="{{ '/categoria/otros-deportes/' | url }}">Otros</a>
+    </div>
+
+    <p class="section-label">Más leídas</p>
+    <ul class="aside-list">
+      {% for post in collections.posts | reverse | slice(0, 6) %}
+        <li class="aside-item">
+          {% if post.data.cover %}
+            <img class="aside-thumb" src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
+          {% else %}
+            <div class="aside-thumb-placeholder"></div>
           {% endif %}
+          <div class="aside-content">
+            {% if post.data.category %}
+              <div class="aside-cat">{{ post.data.category | replace("-", " ") | capitalize }}</div>
+            {% endif %}
+            <a class="aside-title" href="{{ post.url | url }}">{{ post.data.title }}</a>
+            <div class="aside-date">{{ post.data.date | date }}</div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
 
-          <a class="post-card__btn" href="{{ post.url | url }}">
-            Leer más →
-          </a>
-        </div>
-
-      </article>
-      {% endif %}
-    {% endfor %}
-
-  </div>
-</section>
-
-<div class="hr"></div>
-
-{# =========================
-   PAGINACIÓN
-   ========================= #}
-
-<nav class="pagination">
-  <div>
-    {% if pagination.href.previous %}
-      <a href="{{ pagination.href.previous | url }}">← Anterior</a>
-    {% endif %}
-  </div>
-
-  <div>
-    Página {{ pagination.pageNumber + 1 }} de {{ pagination.pages.length }}
-  </div>
-
-  <div>
-    {% if pagination.href.next %}
-      <a href="{{ pagination.href.next | url }}">Siguiente →</a>
-    {% endif %}
-  </div>
-</nav>
+</div>

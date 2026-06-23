@@ -2,19 +2,60 @@
 layout: layouts/base.njk
 ---
 
-<article class="post">
-  {% if cover %}
-    <img class="post-cover" src="{{ cover | url }}" alt="{{ title }}">
-  {% endif %}
+<div class="post-layout">
 
-  <h1>{{ title }}</h1>
+  <article class="post">
+    {% if cover %}
+      <img class="post-cover" src="{{ cover | url }}" alt="{{ title }}">
+    {% endif %}
 
-  <div class="meta">
-    {% if date %}{{ date | date }}{% endif %}
-    {% if category %} · {{ category }}{% endif %}
-  </div>
+    <div class="post-header">
+      <div class="post-eyebrow">
+        {% if category %}
+          <span class="post-cat-badge">{{ category }}</span>
+        {% endif %}
+        {% if date %}
+          <span class="post-date">{{ date | date }}</span>
+        {% endif %}
+      </div>
 
-  <div class="hr"></div>
+      <h1>{{ title }}</h1>
 
-  {{ content | safe }}
-</article>
+      {% set byline = content | striptags | truncate(60) %}
+      {% if "Por:" in content %}
+        <div class="post-byline">
+          Redacción <strong>División Fútbol</strong>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="post-body">
+      {{ content | safe }}
+    </div>
+  </article>
+
+  <aside class="home-aside">
+    <p class="section-label">Más noticias</p>
+    <ul class="aside-list">
+      {% for post in collections.posts | reverse | slice(0, 8) %}
+        {% if post.url != page.url %}
+        <li class="aside-item">
+          {% if post.data.cover %}
+            <img class="aside-thumb" src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" loading="lazy">
+          {% else %}
+            <div class="aside-thumb-placeholder"></div>
+          {% endif %}
+          <div class="aside-content">
+            {% if post.data.category %}
+              <div class="aside-cat">{{ post.data.category | replace("-", " ") | capitalize }}</div>
+            {% endif %}
+            <a class="aside-title" href="{{ post.url | url }}">{{ post.data.title }}</a>
+            <div class="aside-date">{{ post.data.date | date }}</div>
+          </div>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </aside>
+
+</div>
