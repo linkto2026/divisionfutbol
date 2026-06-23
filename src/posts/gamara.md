@@ -3,7 +3,7 @@ layout: layouts/post.njk
 title: "Gamarra: Detrás del sueño y en camino a sus objetivos"
 date: 2026-02-21
 category: "Internacional"
-featured: true
+featured: false
 cover: /uploads/GAM-USA.jpeg
 excerpt: "Entrenador boliviano que busca triunfar en Estados Unidos"
 ---
