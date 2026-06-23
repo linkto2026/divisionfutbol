@@ -4,7 +4,7 @@ title: "Primera B 2026: 20 equipos, ida y vuelta y dos ascensos directos"
 date: 2026-06-23
 category: "ACF Primera B"
 featured: true
-cover: /uploads/sczcamp.jpeg
+cover: /uploads/sczb.jpeg
 excerpt: "El campeonato de la ACF – Primera B ya se encuentra en marcha con un formato de campeonato similar a gestiones pasadas con pequeños cambios"
 ---
 Por: César Alejandro Céspedes Canido
