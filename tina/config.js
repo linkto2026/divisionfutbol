@@ -7,7 +7,7 @@ export default defineConfig({
 
   build: {
     outputFolder: "tinacms",
-    publicFolder: "_site",
+    publicFolder: ".",
   },
 
   media: {
