@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Build site
-        run: run: npm run build
+        run: npm run build
         env:
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           NEXT_PUBLIC_TINA_CLIENT_ID: ec8d5515-703a-4f28-98fe-e24d7c1e6fb9
