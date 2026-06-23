@@ -4,7 +4,7 @@ backend:
   name: git-gateway
   repo: linkto2026/divisionfutbol
   branch: main
-  identity_url: ttps://auth.decapbridge.com/sites/046eb80a-20dd-48e5-bdf2-6a872ce361b3
+  identity_url: https://auth.decapbridge.com/sites/046eb80a-20dd-48e5-bdf2-6a872ce361b3
   gateway_url: https://gateway.decapbridge.com
 
 publish_mode: editorial_workflow
