@@ -6,7 +6,7 @@ export default defineConfig({
   token: "5d2f3ca5781a7ae50abe26ea9b489da2026109e5",
 
   build: {
-    outputFolder: "tinacms",
+    outputFolder: "_site/tinacms",
     publicFolder: ".",
   },
 
