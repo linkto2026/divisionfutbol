@@ -4,7 +4,7 @@ title: "La temporada 2026 del fútbol cruceño con la Primera A se renueva con u
 date: 2026-06-23
 category: "ACF Primera A"
 featured: true
-cover: /uploads/ope-pro.jpg
+cover: /uploads/sczcamp.jpeg
 excerpt: "El campeonato de la ACF – Primera A ya se encuentra en marcha con un formato de campeonato distinto a temporadas, este 2026 se renueva y te contamos los detalles"
 ---
 El Consejo Central de la Asociación Cruceña de Fútbol (ACF) puso fin a la incertidumbre y definió de manera oficial el calendario del torneo de la Primera A para la temporada 2026. El balón volverá a rodar el sábado 1 de mayo.
