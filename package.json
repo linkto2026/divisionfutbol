@@ -8,8 +8,5 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1"
-  },
-  "dependencies": {
-    "@keystatic/core": "^0.5.0"
   }
 }

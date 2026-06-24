@@ -3,7 +3,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
   eleventyConfig.addPassthroughCopy({ "src/js": "js" }); // ✅ necesario para el slider
-  eleventyConfig.addPassthroughCopy({ "keystatic": "keystatic" });
 
   // Filtro fecha seguro (YYYY-MM-DD)
   eleventyConfig.addFilter("date", (value) => {
