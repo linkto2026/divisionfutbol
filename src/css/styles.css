@@ -942,3 +942,102 @@ img { display: block; }
     grid-template-columns: 1fr;
   }
 }
+
+/* =====================
+   MOBILE FIX — < 480px
+   ===================== */
+
+@media (max-width: 480px) {
+
+  /* Evitar overflow horizontal en toda la página */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* TICKER */
+  .ticker-bar {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* HEADER — ocultar nav en móvil y mostrar solo el brand */
+  .header-inner {
+    padding: 0 14px;
+    height: 50px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+
+  /* Ocultar items de nav que no caben */
+  .nav a:not(:first-child):not(:last-child) {
+    display: none;
+  }
+
+  .nav {
+    overflow: hidden;
+    gap: 0;
+    font-size: 11px;
+  }
+
+  .nav a, .nav summary {
+    padding: 6px 5px;
+    font-size: 11px;
+  }
+
+  /* SLIDER — ocupa todo el ancho */
+  .featured-slider {
+    border-radius: var(--radius-md);
+    aspect-ratio: 3/2;
+  }
+
+  .featured-title {
+    font-size: 22px;
+  }
+
+  .featured-excerpt {
+    display: none;
+  }
+
+  .featured-slide-body {
+    padding: 14px 14px 12px;
+  }
+
+  /* CARDS — una por fila, ancho completo */
+  .post-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .post-card__image img {
+    height: 200px;
+  }
+
+  /* CONTAINER — menos padding lateral */
+  .container {
+    padding: 20px 14px;
+  }
+
+  /* FOOTER */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* POST ARTICLE */
+  .post h1 {
+    font-size: 28px;
+  }
+
+  .post-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
