@@ -4,16 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "npx @11ty/eleventy --serve",
-    "build": "npx @11ty/eleventy",
-    "build:eleventy": "npx @11ty/eleventy"
+    "build": "npx @11ty/eleventy"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1"
   },
   "dependencies": {
-    "@keystatic/core": "^0.5.0",
-    "next": "^14.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@keystatic/core": "^0.5.0"
   }
 }
