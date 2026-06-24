@@ -70,6 +70,6 @@ module.exports = function (eleventyConfig) {
       output: "_site",
     },
     templateFormats: ["md", "njk", "html"],
-    pathPrefix: "/divisionfutbol/",
+    pathPrefix: "/",
   };
 };
