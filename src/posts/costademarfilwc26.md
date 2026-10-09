@@ -4,7 +4,7 @@ title: Costa de Marfil hace historia superando por primera vez la fase de grupos
   PRUEBA
 date: 2026-06-25
 category: Internacional
-featured: true
+featured: false
 cover: /uploads/cdmwc26.jpeg
 excerpt: La selección africana se une a los libros de historia del nuevo
   continente al superar una dura fase de grupos en la nueva edición de la Copa
