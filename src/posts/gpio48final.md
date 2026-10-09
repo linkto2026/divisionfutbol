@@ -19,7 +19,7 @@ La noticia generó profunda consternación entre los competidores, equipos y mie
 
 Tras conocerse el fallecimiento, ADECRUZ dispuso la suspensión de la etapa y ordenó que los participantes continuaran hasta Concepción en enlace. En el lugar del accidente se observaron una camioneta estacionada a un costado del camino, una chata con abolladuras y la motocicleta destruida tras el impacto.
 
-La competencia había comenzado el martes desde Cotoca y tenía previsto concluir este viernes en el mismo municipio, pero las circunstancias llevaron a modificar por completo el desarrollo de la prueba.
+La competencia había comenzado el martes desde Cotoca y tenía previsto concluir este sabado en el mismo municipio, pero las circunstancias llevaron a modificar por completo el desarrollo de la prueba.
 
 ### ADECRUZ CONFIRMA LA FINALIZACIÓN DE LA COMPETENCIA
 
