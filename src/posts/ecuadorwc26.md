@@ -1,11 +1,12 @@
 ---
 layout: layouts/post.njk
-title: "Tras 20 años de espera, Ecuador vuelve a pasar la fase de grupos"
+title: Tras 20 años de espera, Ecuador vuelve a pasar la fase de grupos
 date: 2026-06-25
-category: "Internacional"
-featured: true
+category: Internacional
+featured: false
 cover: /uploads/ecuador1.jpeg
-excerpt: "La selección ecuatoriana se anota en los dieciseisavos de final de esta nueva edición de la Copa del Mundo"
+excerpt: La selección ecuatoriana se anota en los dieciseisavos de final de esta
+  nueva edición de la Copa del Mundo
 ---
 La selección de Ecuador marcó hito en la Copa del Mundo. Con su victoria por 2-1 sobre Alemania, la "Tri" aseguró su clasificación a los dieciseisavos de final y puso fin a una sequía de dos décadas sin superar la fase de grupos. El resultado representa uno de los triunfos más importantes del fútbol ecuatoriano.
 
