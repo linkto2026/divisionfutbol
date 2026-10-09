@@ -1,0 +1,71 @@
+
+media:
+  input: src/uploads
+  output: /uploads
+
+content:
+  - name: posts
+    label: Noticias
+    type: collection
+    path: src/posts
+    format: yaml-frontmatter
+    view:
+      primary: title
+      fields:
+        - title
+        - date
+        - category
+      sort: date
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: layout
+        label: Plantilla
+        type: string
+        hidden: true
+
+      - name: title
+        label: Titular
+        type: string
+        required: true
+
+      - name: date
+        label: Fecha de publicación
+        type: date
+        required: true
+
+      - name: category
+        label: Categoría
+        type: select
+        required: true
+        options:
+          values:
+            - Selección
+            - División Profesional
+            - Copa Simón Bolívar
+            - ACF Primera A/B
+            - ACF Ascensos
+            - Internacional
+            - Automovilismo
+            - Otros Deportes
+
+      - name: featured
+        label: Destacar en portada
+        type: boolean
+
+      - name: cover
+        label: Fotografía de portada
+        type: image
+
+      - name: excerpt
+        label: Bajada de la noticia
+        type: text
+
+      - name: body
+        label: Cuerpo de la noticia
+        type: rich-text
+
+settings:
+  content:
+    merge: true
